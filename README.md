@@ -1,6 +1,7 @@
 # Weather App
 
 This is a simple weather application built using React.js. It allows users to search for the current weather and weather forecast for a specific city.
+click here to explore the live demo -> https://weather-repo-sand.vercel.app/
 
 ## Features
 
