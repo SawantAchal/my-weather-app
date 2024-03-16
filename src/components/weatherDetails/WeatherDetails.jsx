@@ -15,6 +15,7 @@ const ContentContainer = styled.div`
 
 const WeatherBox = styled(Box)`
   // background-color: #cbcccb;
+  border: 2px solid gray; 
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
