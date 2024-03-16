@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getWeatherData } from '../utils/api';
+import { getWeatherData ,getWeatherForecast} from '../utils/api';
 import WeatherDetails from '../components/weatherDetails/WeatherDetails';
-import { Box, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import bg from '../assets/bg2.jpg';
+import WeatherForecast from '../components/weatherDetails/WeatherForecast';
 
 const Container = styled.div`
   background-image: url(${bg});
@@ -32,6 +32,7 @@ const Heading = styled.h1`
 
 const WeatherDetailPage = () => {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
   const { city } = useParams(); //get city from params
 
   //function to fetch weather data for the specified location
@@ -48,9 +49,24 @@ const WeatherDetailPage = () => {
     }
   };
 
+
+  
+  const fetchWeatherForecast = async () => {
+    try {
+      const response = await getWeatherForecast(city);
+      if (response) {
+        setForecastData(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching weather forecast data:', error);
+    }
+  };
+
+
   //fetch weather data when component mount
   useEffect(() => {
     fetchWeatherData();
+    fetchWeatherForecast();
   }, [city]);
 
   return (
@@ -61,6 +77,7 @@ const WeatherDetailPage = () => {
         </Heading>
         {/* check if weather data is available */}
         {weatherData && <WeatherDetails weatherData={weatherData} />}
+        {forecastData && <WeatherForecast forecastData={forecastData} />}
       </ContentContainer>
     </Container>
   );
