@@ -1,25 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getWeatherData ,getWeatherForecast} from '../utils/api';
+import { getWeatherData, getWeatherForecast } from '../utils/api';
 import WeatherDetails from '../components/weatherDetails/WeatherDetails';
 import styled from '@emotion/styled';
-import bg from '../assets/bg2.jpg';
+import bg from '../assets/bg5.webp';
 import WeatherForecast from '../components/weatherDetails/WeatherForecast';
 
 const Container = styled.div`
-  background-image: url(${bg});
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh; /* Ensure background covers the entire viewport */
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${bg});
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    z-index: -1;
+  }
 `;
 
 const ContentContainer = styled.div`
   position: relative;
-  z-index: 1; /* Ensure content is above background */
+  z-index: 1;
   padding: 20px;
 `;
 
@@ -48,9 +60,7 @@ const WeatherDetailPage = () => {
       console.error('Error while fetching weather data:', error);
     }
   };
-
-
-  
+  // Function to fetch weather forecast data for the specified location
   const fetchWeatherForecast = async () => {
     try {
       const response = await getWeatherForecast(city);
@@ -62,7 +72,6 @@ const WeatherDetailPage = () => {
     }
   };
 
-
   //fetch weather data when component mount
   useEffect(() => {
     fetchWeatherData();
@@ -72,9 +81,7 @@ const WeatherDetailPage = () => {
   return (
     <Container>
       <ContentContainer>
-        <Heading>
-          Weather Forecast for: {city}
-        </Heading>
+        <Heading>Weather Forecast for: {city}</Heading>
         {/* check if weather data is available */}
         {weatherData && <WeatherDetails weatherData={weatherData} />}
         {forecastData && <WeatherForecast forecastData={forecastData} />}

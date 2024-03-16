@@ -4,6 +4,7 @@ import { WiHumidity, WiThermometer, WiStrongWind, WiSunrise, WiSunset } from 're
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+// Styled components for weather container and weather box
 const ContentContainer = styled.div`
   padding: 20px;
   display: flex;
@@ -13,7 +14,7 @@ const ContentContainer = styled.div`
 `;
 
 const WeatherBox = styled(Box)`
-  background-color: #cbcccb;
+  // background-color: #cbcccb;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -53,16 +54,18 @@ const StyleButton = styled(Button)`
   }
 `;
 
+// WeatherDetails component to display weather information
 const WeatherDetails = ({ weatherData }) => {
   const { data } = weatherData;
   const { temp, wind_spd, pres, rh, precip, sunrise, sunset, city_name, weather } = data[0];
   const { description } = weather;
   const navigate = useNavigate();
 
+    // Function to handle button click
   const handleButton = () => {
     navigate('/');
   };
-
+ // Rendering weather details and button
   return (
     <ContentContainer>
       <WeatherBox>

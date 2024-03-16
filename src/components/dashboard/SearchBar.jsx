@@ -50,13 +50,38 @@ const SearchBar = () => {
     const navigate = useNavigate()
 
     //Function for button to serach city
-    const handleSearch = () =>{
-        if (city) {
-            navigate(`/weather-details/${city}`)
-        } else {
-            alert('please enter a valid city name')
+    const handleSearch = async () => {
+        try {
+          if (city) {
+            const isValidCity = await validateCity(city);
+            if (isValidCity) {
+              navigate(`/weather-details/${encodeURIComponent(city)}`);
+            } else {
+              alert('Please enter a valid city');
+            }
+          } else {
+            alert('Please enter a city');
+          }
+        } catch (error) {
+          console.error('Error validating city:', error);
+          alert('Failed to validate city');
         }
-    }
+      };
+
+      const validateCity = async (city) => {
+        try {
+          const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`);
+          if (!response.ok) {
+            throw new Error('Failed to validate city');
+          }
+          const data = await response.json();
+          return data && data.length > 0;
+        } catch (error) {
+          throw new Error('Failed to validate city');
+        }
+      };
+
+      // Render the component
   return (
     <FBox>
         <Input id="outlined-basic" label="Enter a City" variant="outlined" value={city} onChange={(e) => setCity(e.target.value)}/>

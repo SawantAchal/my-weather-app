@@ -2,6 +2,8 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
+
+// Styled components for weather container and weather box
 const WeatherContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -17,15 +19,23 @@ const WeatherBox = styled.div`
   margin: 10px;
 `;
 
+
+// WeatherForecast component
 const WeatherForecast = ({ forecastData }) => {
+   // If forecast data is not available, return null
     if (!forecastData) return null;
   return (
     <WeatherContainer>
+      {/* Map through forecastData array */}
       {forecastData.map((dayData, index) => (
         <WeatherBox key={index}>
+           {/* Display day of the week */}
         <Typography variant="subtitle1">{new Date(dayData.datetime).toLocaleDateString('en-US', { weekday: 'short' }).slice(0, 3)}</Typography>
+         {/* Display day and month */}
         <Typography variant="subtitle1">{new Date(dayData.datetime).toLocaleDateString('en-US', { day: '2-digit' , month: '2-digit',})}</Typography>
+          {/* Display temperature */}
         <Typography variant="body1">{dayData.temp}°C</Typography>
+          {/* Uncomment below to display weather description */}
         {/* <Typography variant="body1">{dayData.weather.description}</Typography> */}
     </WeatherBox>
       ))}
