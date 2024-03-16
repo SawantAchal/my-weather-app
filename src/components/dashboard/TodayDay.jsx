@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { MdDateRange } from "react-icons/md";
 
 const FBox = styled(Box)`
-color :white;
+color :black;
 display: flex;
 align-items: center;
 `
