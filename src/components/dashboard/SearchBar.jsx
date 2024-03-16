@@ -12,21 +12,32 @@ margin-top: 2rem;
 
 const WButton = styled(Button)`
 margin-top: 2rem;
-color: gray;
-border-radius: 2%;
-border-color: black;
 width:30%
-width: fit-content; /* Adjust to make button size smaller */
-    align-self: center; /* Center button horizontally */
+width: fit-content;
+align-self: center;
+background-color: black;
+color: white;
+border-color: #989898;
+border-radius: 5px;
+padding: 10px 20px;
+transition: background-color 0.3s ease;
+
+&:hover {
+  background-color: #989898;
+  color: black;
+  border-color: black;
+}
 `
 
 const Input = styled(TextField)`
 width: 100%;
 
 & .MuiOutlinedInput-root {
-    border-color: black; /* Change border color */
-    color: white; /* Change text color */
+    border-color: black;
+    color: black;
     background-color: transparent;
+    font-size: 20px;
+    font-style:bold;
 }
 
 @media (min-width: 600px) {
@@ -48,7 +59,7 @@ const SearchBar = () => {
     }
   return (
     <FBox>
-        <Input id="outlined-basic" label="City" variant="outlined" value={city} onChange={(e) => setCity(e.target.value)}/>
+        <Input id="outlined-basic" label="Enter a City" variant="outlined" value={city} onChange={(e) => setCity(e.target.value)}/>
         <WButton variant="outlined" onClick={handleSearch}>Get Weather</WButton>
     </FBox>
   )
