@@ -76,7 +76,7 @@ const WeatherDetailPage = () => {
   useEffect(() => {
     fetchWeatherData();
     fetchWeatherForecast();
-  }, [city, fetchWeatherData, fetchWeatherForecast]);
+  }, [city]);
 
   return (
     <Container>
