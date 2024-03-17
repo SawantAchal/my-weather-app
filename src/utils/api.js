@@ -1,4 +1,4 @@
-API_KEY='eb29ffaea9dd4af49d98e47ec17ec3f4'
+const API_KEY='eb29ffaea9dd4af49d98e47ec17ec3f4'
 
 // Function to fetch current weather data for a specified city
   export const getWeatherData = async (city) => {
