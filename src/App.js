@@ -2,7 +2,6 @@ import {BrowserRouter,  Route,  Routes } from 'react-router-dom';
 import './App.css';
 import DashboardPage from './pages/DashboardPage';
 import WeatherDetailPage from './pages/WeatherDetailPage';
-import WeatherComponent from './pages/WeatherDetailPage';
 
 function App() {
   return (
